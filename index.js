@@ -76,11 +76,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Selecciona el texto
         let texto = document.getElementById("texto");
         texto.select();
-
         // Copia el texto al portapapeles
         document.execCommand('copy');
-
-        // Muestra un mensaje de confirmación
         swal("Hecho!", "El texto ha sido copiado al portapapeles", "success");
     });
 });
