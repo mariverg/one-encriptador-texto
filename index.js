@@ -1,8 +1,22 @@
+function validarTexto(texto) {
+    
+    var regex = /^[a-z]+$/;
+    if (!regex.test(texto)) {
+        return false;
+    }
+    return true;
+}
+
 function encriptar() {
     let texto = document.getElementById("texto").value;
     let tituloMensaje = document.getElementById("titulo-mensaje");
     let parrafo = document.getElementById("parrafo");
     let muñeco = document.getElementById("muñeco");
+
+    if (!validarTexto(texto)) {
+        swal("Ooops!", "El texto solo debe contener letras minúsculas y sin acentos", "warning");
+        return;
+    }
 
     let textoCifrado = texto
     .replace(/e/gi, "enter")
@@ -31,6 +45,12 @@ function desencriptar() {
     let parrafo = document.getElementById("parrafo");
     let muñeco = document.getElementById("muñeco");
 
+    // Validar el texto antes de desencriptarlo
+    if (!validarTexto(texto)) {
+        swal("Ooops!", "El texto solo debe contener letras minúsculas y sin acentos", "warning");
+        return;
+    }
+
     let textoCifrado = texto
     .replace(/enter/gi, "e")
     .replace(/imes/gi,"i")
@@ -51,4 +71,17 @@ function desencriptar() {
     }
 }
 
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('boton-copiar').addEventListener('click', function() {
+        // Selecciona el texto
+        let texto = document.getElementById("texto");
+        texto.select();
+
+        // Copia el texto al portapapeles
+        document.execCommand('copy');
+
+        // Muestra un mensaje de confirmación
+        swal("Hecho!", "El texto ha sido copiado al portapapeles", "success");
+    });
+});
 
